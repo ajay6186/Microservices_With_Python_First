@@ -1,0 +1,23 @@
+{
+    "family": "my-microservice-task",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "256",
+    "memory": "512",
+    "executionRoleArn": "arn:aws:iam::216989092888:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+      {
+        "name": "my-microservice-container",
+        "image": "216989092888.dkr.ecr.us-east-1.amazonaws.com/my-microservice:latest",
+        "portMappings": [
+          {
+            "containerPort": 5000,
+            "hostPort": 5000,
+            "protocol": "tcp"
+          }
+        ],
+        "essential": true
+      }
+    ]
+  }
+  

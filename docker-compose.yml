@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+
+  frontend:
+    build: ./frontend_service
+    ports:
+      - "3000:3000"
+      
+  user-service:
+    build: ./user_service  # Path to your user service Dockerfile
+    # image: 216989092888.dkr.ecr.us-east-1.amazonaws.com/user_service:latest # aws important
+    container_name: user-service
+    ports:
+      - "5000:5000"  # Expose User API on port 5000
+    
+  product-service:
+    build: ./product_service  # Path to your product service Dockerfile
+    # image: 216989092888.dkr.ecr.us-east-1.amazonaws.com/product_service:latest # aws important
+    container_name: product-service
+    ports:
+      - "5001:5001"  # Expose User API on port 5000
+
+  order-service:
+    build: ./order_service  # Path to your order service Dockerfile
+    # image: 216989092888.dkr.ecr.us-east-1.amazonaws.com/order_service:latest # aws important
+    container_name: order-service
+    ports:
+      - "5002:5002"  # Expose Order API on port 5001
+    depends_on:
+      - user-service  # Ensure the User Service starts first
